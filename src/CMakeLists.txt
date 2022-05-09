@@ -1,0 +1,13 @@
+add_library(DeviceCLI INTERFACE)
+add_library(DeviceDaemon INTERFACE)
+target_include_directories(DeviceCLI INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(DeviceDaemon INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+add_subdirectory(common)
+
+IF (NOT DEFINED Device)
+	add_subdirectory(stub)
+ELSEIF(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${Device}")
+	add_subdirectory(${Device})
+ELSE()
+	message(FATAL_ERROR "Device=${Device} not implemented")
+ENDIF ()
