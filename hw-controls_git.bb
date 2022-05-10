@@ -14,3 +14,5 @@ S = "${WORKDIR}/git"
 DEPENDS = "cli11"
 inherit cmake pkgconfig
 
+EXTRA_OECMAKE = "-DDevice=${MACHINE}"
+PACKAGE_ARCH = "${MACHINE_ARCH}"
