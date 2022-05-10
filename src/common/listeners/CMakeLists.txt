@@ -1,2 +1,1 @@
-add_library(TimeSync INTERFACE)
-target_sources(TimeSync INTERFACE TimeSyncBase.cpp)
+target_sources(DeviceDaemon INTERFACE TimeSyncListener.cpp)

@@ -2,17 +2,17 @@
 // Created by lecris on 5/10/22.
 //
 
-#include "TimeSyncBase.hpp"
+#include "TimeSyncListener.hpp"
 #include <iostream>
 
 using namespace AsteroidOS::HW_CONTROLS;
 
-TimeSyncBase::TimeSyncBase( DaemonBase& parent ) :
+TimeSyncListener::TimeSyncListener( DaemonBase& parent ) :
 		ListenerBase(parent, "org.freedesktop.timedate1", "/org/freedesktop/timedate1") {
 	Proxy->registerSignalHandler("org.freedesktop.DBus.Properties", "PropertiesChanged",
 	                             [this]( sdbus::Signal& s ) { Callback(s); });
 }
-void TimeSyncBase::Callback( sdbus::Signal& signal ) {
+void TimeSyncListener::Callback( sdbus::Signal& signal ) {
 	std::string interface;
 	signal >> interface;
 	if (interface != "org.freedesktop.timedate1") {
@@ -25,7 +25,7 @@ void TimeSyncBase::Callback( sdbus::Signal& signal ) {
 		if (prop.first != "NTP" && prop.first != "Timezone" && prop.first != "LocalRTC")
 			std::cerr << "Received unexpected changed property:Property = " << prop.first << std::endl;
 	if (changed_props.contains("NTP") || changed_props.contains("Timezone") || changed_props.contains("LocalRTC")) {
-		auto res = SyncTime();
+		auto res = Parent.Device->SyncTime();
 		if (!res)
 			std::cerr << "SyncTime() failed\n";
 	}

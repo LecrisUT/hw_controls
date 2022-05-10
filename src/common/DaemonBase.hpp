@@ -2,9 +2,10 @@
 // Created by lecris on 5/10/22.
 //
 
-#ifndef HW_CONTROLS_SRC_COMMON_DAEMONBASE_HPP
-#define HW_CONTROLS_SRC_COMMON_DAEMONBASE_HPP
+#ifndef HW_CONTROLS_DAEMONBASE_HPP
+#define HW_CONTROLS_DAEMONBASE_HPP
 
+#include "DeviceBase.hpp"
 #include <sdbus-c++/sdbus-c++.h>
 #include <memory>
 #include <map>
@@ -18,9 +19,10 @@ namespace AsteroidOS::HW_CONTROLS {
 		const std::unique_ptr<sdbus::IConnection> Connection;
 		ObjectMap Objects;
 		ListenerVec Listeners;
-		std::string Device;
+		const std::shared_ptr<DeviceBase> Device;
+		static std::shared_ptr<DaemonBase> GetDaemon();
 	protected:
-		explicit DaemonBase(std::string_view device);
+		DaemonBase();
 
 	public:
 		virtual void EnertLoop();
@@ -34,7 +36,6 @@ namespace AsteroidOS::HW_CONTROLS {
 	protected:
 		ListenerBase( DaemonBase& parent, const std::string& Destination, const std::string& Object );
 	};
-	class Daemon;
 }
 
-#endif //HW_CONTROLS_SRC_COMMON_DAEMONBASE_HPP
+#endif //HW_CONTROLS_DAEMONBASE_HPP

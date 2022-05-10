@@ -6,5 +6,9 @@
 
 using namespace AsteroidOS::HW_CONTROLS;
 
-CLIApp::CLIApp() :
-		CLIAppBase("[No Device]") { }
+stub::CLIApp::CLIApp() = default;
+
+std::shared_ptr<CLIAppBase> CLIAppBase::GetApp() {
+	static auto app = std::make_shared<stub::CLIApp>();
+	return app;
+}

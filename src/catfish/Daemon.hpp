@@ -2,12 +2,12 @@
 // Created by lecris on 5/10/22.
 //
 
-#ifndef HW_CONTROLS_SRC_CATFISH_DAEMON_HPP
-#define HW_CONTROLS_SRC_CATFISH_DAEMON_HPP
+#ifndef HW_CONTROLS_CATFISH_DAEMON_HPP
+#define HW_CONTROLS_CATFISH_DAEMON_HPP
 
 #include "common/DaemonBase.hpp"
 
-namespace AsteroidOS::HW_CONTROLS {
+namespace AsteroidOS::HW_CONTROLS::catfish {
 	class Daemon:
 			public DaemonBase{
 	public:
@@ -15,4 +15,4 @@ namespace AsteroidOS::HW_CONTROLS {
 	};
 }
 
-#endif //HW_CONTROLS_SRC_CATFISH_DAEMON_HPP
+#endif //HW_CONTROLS_CATFISH_DAEMON_HPP

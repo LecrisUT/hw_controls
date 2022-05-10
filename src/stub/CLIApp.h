@@ -2,12 +2,12 @@
 // Created by lecris on 5/9/22.
 //
 
-#ifndef HW_CONTROLS_CLIAPP_H
-#define HW_CONTROLS_CLIAPP_H
+#ifndef HW_CONTROLS_STUB_CLIAPP_H
+#define HW_CONTROLS_STUB_CLIAPP_H
 
 #include "common/CLIAppBase.h"
 
-namespace AsteroidOS::HW_CONTROLS {
+namespace AsteroidOS::HW_CONTROLS::stub {
 	class CLIApp :
 			public CLIAppBase {
 	public:
@@ -15,4 +15,4 @@ namespace AsteroidOS::HW_CONTROLS {
 	};
 }
 
-#endif //HW_CONTROLS_CLIAPP_H
+#endif //HW_CONTROLS_STUB_CLIAPP_H

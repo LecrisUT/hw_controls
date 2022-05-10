@@ -6,9 +6,9 @@
 
 using namespace AsteroidOS::HW_CONTROLS;
 
-catfish::CLIApp::CLIApp() = default;
+narwhal::CLIApp::CLIApp() = default;
 
 std::shared_ptr<CLIAppBase> CLIAppBase::GetApp() {
-	static auto app = std::make_shared<catfish::CLIApp>();
+	static auto app = std::make_shared<narwhal::CLIApp>();
 	return app;
 }

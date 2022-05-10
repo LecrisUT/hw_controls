@@ -3,6 +3,7 @@
 //
 
 #include "DaemonBase.hpp"
+#include "listeners/TimeSyncListener.hpp"
 #include <iostream>
 
 using namespace AsteroidOS::HW_CONTROLS;
@@ -10,14 +11,17 @@ using namespace AsteroidOS::HW_CONTROLS;
 void DaemonBase::EnertLoop() {
 	Connection->enterEventLoop();
 }
-DaemonBase::DaemonBase( std::string_view device ) :
-		Device(device), Connection(sdbus::createSystemBusConnection("org.asteroidos.hwcontrols")) {
+DaemonBase::DaemonBase() :
+		Device(DeviceBase::GetDevice()),
+		Connection(sdbus::createSystemBusConnection("org.asteroidos.hwcontrols")) {
 	auto res = AddObject("/org/asteroidos/hwcontrols");
 	assert(res.second);
 	auto& obj = res.first->second;
 	obj->registerProperty("Device").
 			onInterface("org.asteroidos.hwcontrols").
-			withGetter([this]() { return this->Device; });
+			withGetter([this]() { return this->Device->Name; });
+	if (Device->Implementations.contains(syncTime))
+		Listeners.push_back(std::make_unique<TimeSyncListener>(*this));
 }
 std::pair<DaemonBase::ObjectMap::iterator, bool> DaemonBase::AddObject( const std::string& Name ) {
 	return Objects.insert({Name, sdbus::createObject(*Connection, Name)});

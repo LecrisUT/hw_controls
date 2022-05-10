@@ -6,8 +6,14 @@
 
 using namespace AsteroidOS::HW_CONTROLS;
 
-CLIAppBase::CLIAppBase( std::string_view device ) {
+CLIAppBase::CLIAppBase() :
+		Device(DeviceBase::GetDevice()) {
+	this->name("Hw-controls");
 	std::string description = "hw-controls: Helper tool for various extra/specific hardware\nDevice: ";
-	description += device;
+	description += Device->Name;
 	this->description(description);
+	if (Device->Implementations.contains(syncTime)){
+		auto syncTime = this->add_subcommand("syncTime", "Sync hardware time with linux time");
+		syncTime->callback([this]() { Device->SyncTime(); });
+	}
 }

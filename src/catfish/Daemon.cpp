@@ -3,10 +3,11 @@
 //
 
 #include "Daemon.hpp"
-#include "listeners/TimeSync.hpp"
 
 using namespace AsteroidOS::HW_CONTROLS;
-Daemon::Daemon():
-		DaemonBase("catfish"){
-	Listeners.push_back(std::make_unique<TimeSync>(*this));
+
+catfish::Daemon::Daemon() = default;
+std::shared_ptr<DaemonBase> DaemonBase::GetDaemon() {
+	static auto daemon = std::make_shared<catfish::Daemon>();
+	return daemon;
 }

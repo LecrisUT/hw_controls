@@ -1,17 +1,17 @@
-#include "CLIApp.h"
+#include "CLIAppBase.h"
 
 #include <CLI/CLI.hpp>
 
 using namespace AsteroidOS::HW_CONTROLS;
 
 int main( int argc, char** argv ) {
-	CLIApp app;
+	auto app = CLIAppBase::GetApp();
 	try {
-		app.parse(argc, argv);
+		app->parse(argc, argv);
 		if (argc <= 1)
 			throw CLI::CallForAllHelp();
 	} catch (const CLI::ParseError& e) {
-		return app.exit(e);
+		return app->exit(e);
 	}
 	return 0;
 }

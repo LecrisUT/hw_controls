@@ -6,8 +6,8 @@
 
 using namespace AsteroidOS::HW_CONTROLS;
 
-stub::Daemon::Daemon() = default;
+narwhal::Daemon::Daemon() = default;
 std::shared_ptr<DaemonBase> DaemonBase::GetDaemon() {
-	static auto daemon = std::make_shared<stub::Daemon>();
+	static auto daemon = std::make_shared<narwhal::Daemon>();
 	return daemon;
 }
