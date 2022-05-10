@@ -16,3 +16,6 @@ inherit cmake pkgconfig
 
 EXTRA_OECMAKE = "-DDevice=${MACHINE}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+PACKAGES = "${PN}-dbg ${PN}-dev ${PN}-cli ${PN}-daemon"
+
+FILES:${PN}-cli = "${bindir}/hw-tools"
